@@ -24,23 +24,22 @@ class ViewController: UIViewController {
     }
     
     func DateInit() {
-        // 現在の日時を取得する
-        let dateformatter = DateFormatter()
-        // 書式とロケールを設定
-        dateformatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yMMMd", options: 0, locale: Locale(identifier: "ja_JP"))
-        // 文字列型に変換
-        let baseDateText = dateformatter.string(from: Date())
-        
+        calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "Asia/Tokyo")! // タイムゾーンを設定
+        calendar.locale = Locale(identifier: "ja") // ロケール（地域）を設定
     }
     
     // 基準日時から、1年後までの日時を取得して、リストに格納する
     func getFutureDate() {
-        // 基準の日時を生成（2020年4月10日 21:00:00）
-        let baseDate = calendar.date(from: DateComponents(year: 2020, month: 4, day: 10, hour: 21, minute: 0, second: 0))!
-        // 基準日時の5時間30分後を算出（加算）
-        let resultDate1 = calendar.date(byAdding: DateComponents(hour: 5, minute: 30), to: baseDate)
+        // 基準となる現在の日時を取得する
+        let baseDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date())
+      // 基準日時の5時間30分後を算出（加算）
+        let resultDate1 = calendar.date(byAdding: DateComponents(hour: 5, minute: 30), to: Date())
         // 基準日時の20日前を算出（減算）
-        let resultDate2 = calendar.date(byAdding: DateComponents(day: -20), to: baseDate)
+//        let resultDate2 = calendar.date(byAdding: DateComponents(day: -20), to: baseDate)
+        print("現在時刻：" + String(baseDate.year!) + "年" + String(baseDate.month!) + "月" + String(baseDate.day!) + "日" + String(baseDate.hour!) + "時" + String(baseDate.minute!) + "分" + String(baseDate.second!) + "秒")
+        print(resultDate1!)
+        print(type(of: baseDate))
     }
     // 基準日時から、1年前までの日時を取得して、リストに格納する
     func getPastDate() {
