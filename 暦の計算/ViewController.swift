@@ -32,14 +32,17 @@ class ViewController: UIViewController {
     // 基準日時から、1年後までの日時を取得して、リストに格納する
     func getFutureDate() {
         // 基準となる現在の日時を取得する
-        let baseDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date())
+        var baseDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date())
       // 基準日時の5時間30分後を算出（加算）
-        let resultDate1 = calendar.date(byAdding: DateComponents(hour: 5, minute: 30), to: Date())
-        // 基準日時の20日前を算出（減算）
-//        let resultDate2 = calendar.date(byAdding: DateComponents(day: -20), to: baseDate)
-        print("現在時刻：" + String(baseDate.year!) + "年" + String(baseDate.month!) + "月" + String(baseDate.day!) + "日" + String(baseDate.hour!) + "時" + String(baseDate.minute!) + "分" + String(baseDate.second!) + "秒")
-        print(resultDate1!)
-        print(type(of: baseDate))
+        var resultDate1 = baseDate
+        resultDate1.hour = baseDate.hour! + 5
+        resultDate1.minute = baseDate.minute! + 30
+        // 基準日時の1ヶ月前を算出（減算）
+        var resultDate2 = baseDate
+        resultDate2.month = baseDate.month! - 1
+        print("現在時刻                    　 ：" + String(baseDate.year!) + "年" + String(baseDate.month!) + "月" + String(baseDate.day!) + "日" + String(baseDate.hour!) + "時" + String(baseDate.minute!) + "分" + String(baseDate.second!) + "秒")
+        print("基準日時の5時間30分後を算出（加算）：" + String(resultDate1.year!) + "年" + String(resultDate1.month!) + "月" + String(resultDate1.day!) + "日" + String(resultDate1.hour!) + "時" + String(resultDate1.minute!) + "分" + String(resultDate1.second!) + "秒")
+        print("基準日時の1ヶ月前を算出（減算）    ：" + String(resultDate2.year!) + "年" + String(resultDate2.month!) + "月" + String(resultDate2.day!) + "日" + String(resultDate2.hour!) + "時" + String(resultDate2.minute!) + "分" + String(resultDate2.second!) + "秒")
     }
     // 基準日時から、1年前までの日時を取得して、リストに格納する
     func getPastDate() {
