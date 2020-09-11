@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     var calendar = Calendar(identifier: .gregorian) // グレゴリオ暦
     var futureDateArray:Array = [String]() // 未来の日付
     var pastDateArray:Array = [String]() // 過去の日付
-    var baseDate = Date()
+    var baseDate = DateComponents()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,35 +27,60 @@ class ViewController: UIViewController {
         calendar = Calendar.current
         calendar.timeZone = TimeZone(identifier: "Asia/Tokyo")! // タイムゾーンを設定
         calendar.locale = Locale(identifier: "ja") // ロケール（地域）を設定
+        // 基準となる現在の日時を取得する
+        baseDate = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date())
+        print("現在時刻                    　 ：" + String(baseDate.year!) + "年" + String(baseDate.month!) + "月" + String(baseDate.day!) + "日" + String(baseDate.hour!) + "時" + String(baseDate.minute!) + "分" + String(baseDate.second!) + "秒")
     }
     
     // 基準日時から、1年後までの日時を取得して、リストに格納する
     func getFutureDate() {
-        // 基準となる現在の日時を取得する
-        var baseDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date())
       // 基準日時の5時間30分後を算出（加算）
-        var resultDate1 = baseDate
-        resultDate1.hour = baseDate.hour! + 5
-        resultDate1.minute = baseDate.minute! + 30
-        // 基準日時の1ヶ月前を算出（減算）
-        var resultDate2 = baseDate
-        resultDate2.month = baseDate.month! - 1
-        print("現在時刻                    　 ：" + String(baseDate.year!) + "年" + String(baseDate.month!) + "月" + String(baseDate.day!) + "日" + String(baseDate.hour!) + "時" + String(baseDate.minute!) + "分" + String(baseDate.second!) + "秒")
-        print("基準日時の5時間30分後を算出（加算）：" + String(resultDate1.year!) + "年" + String(resultDate1.month!) + "月" + String(resultDate1.day!) + "日" + String(resultDate1.hour!) + "時" + String(resultDate1.minute!) + "分" + String(resultDate1.second!) + "秒")
-        print("基準日時の1ヶ月前を算出（減算）    ：" + String(resultDate2.year!) + "年" + String(resultDate2.month!) + "月" + String(resultDate2.day!) + "日" + String(resultDate2.hour!) + "時" + String(resultDate2.minute!) + "分" + String(resultDate2.second!) + "秒")
+        var futureDate = baseDate
+        futureDate.day = futureDate.day! + 153
+        // 繰り上げ処理
+        while true{
+            // 31日: 1, 3, 5, 7, 8, 10, 12月
+            if (futureDate.month == 1 && futureDate.day! > 31) ||  (futureDate.month == 3 && futureDate.day! > 31) || (futureDate.month == 5 && futureDate.day! > 31) || (futureDate.month == 7 && futureDate.day! > 31) || (futureDate.month == 8 && futureDate.day! > 31) || (futureDate.month == 10 && futureDate.day! > 31) || (futureDate.month == 12 && futureDate.day! > 31) {
+                
+                // 日数が31日以下になったら無限ループを抜ける
+                if (futureDate.month == 1 && futureDate.day! <= 31) ||  (futureDate.month == 3 && futureDate.day! <= 31) || (futureDate.month == 5 && futureDate.day! <= 31) || (futureDate.month == 7 && futureDate.day! <= 31) || (futureDate.month == 8 && futureDate.day! <= 31) || (futureDate.month == 10 && futureDate.day! <= 31) || (futureDate.month == 12 && futureDate.day! <= 31) {
+                    break
+                }
+            }
+            // 30日: 4, 6, 9, 11
+            if (futureDate.month == 4 && futureDate.day! > 30) || (futureDate.month == 6 && futureDate.day! > 30) || (futureDate.month == 9 && futureDate.day! > 30) || (futureDate.month == 11 && futureDate.day! > 30) {
+                
+                // 日数が30日以下になったら無限ループを抜ける
+                if (futureDate.month == 4 && futureDate.day! <= 30) || (futureDate.month == 6 && futureDate.day! <= 30) || (futureDate.month == 9 && futureDate.day! <= 30) || (futureDate.month == 11 && futureDate.day! <= 30)  {
+                    break
+                }
+            }
+            // 29日(うるう年): 2月
+            if (futureDate.year! % 4 == 0) || (futureDate.month == 2) || (futureDate.day! > 29) {
+                
+                // 日数が29日以下になったら無限ループを抜ける
+                if (futureDate.year! % 4 == 0) || (futureDate.month == 2) || (futureDate.day! <= 29) {
+                    break
+                }
+            }
+            // 28日（非うるう年): 2月
+            if  (futureDate.year! % 4 == 1) || (futureDate.month == 2) || (futureDate.day! > 28) {
+                
+                // 日数が28日以下になったら無限ループを抜ける
+                if (futureDate.year! % 4 == 1) || (futureDate.month == 2) || (futureDate.day! <= 28) {
+                    break
+                }
+            }
+        }
+        futureDate.minute = baseDate.minute! + 30
+        print("基準日時の153日後を算出（加算）：" + String(futureDate.year!) + "年" + String(futureDate.month!) + "月" + String(futureDate.day!) + "日" + String(futureDate.hour!) + "時" + String(futureDate.minute!) + "分" + String(futureDate.second!) + "秒")
     }
     // 基準日時から、1年前までの日時を取得して、リストに格納する
     func getPastDate() {
-        for i in 1...365 {
-            // 現在の日時を取得する
-            let dateformatter = DateFormatter()
-            // 書式とロケールを設定
-            dateformatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yMMMd", options: 0, locale: Locale(identifier: "ja_JP"))
-            // 基準日時の1日後、2日後、3日後...を算出（加算）
-            let pastDates = dateformatter.string(from: Date())
-//            print()
-            pastDateArray.append(pastDates) // 0~364までの要素（365個）
-        }
-
+        // 基準日時の5時間30分前を算出（減算）
+        var pastDate = baseDate
+        pastDate.hour = baseDate.hour! - 5
+        pastDate.minute = baseDate.minute! - 30
+        print("基準日時の5時間30分後を算出（加算）：" + String(pastDate.year!) + "年" + String(pastDate.month!) + "月" + String(pastDate.day!) + "日" + String(pastDate.hour!) + "時" + String(pastDate.minute!) + "分" + String(pastDate.second!) + "秒")
     }
 }
