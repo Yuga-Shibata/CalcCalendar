@@ -36,64 +36,68 @@ class ViewController: UIViewController {
     func getFutureDate() {
       // 基準日時の5時間30分後を算出（加算）
         var futureDate = baseDate
-        futureDate.day = futureDate.day! + 153
+        futureDate.day = futureDate.day! + 180
         // 繰り上げ処理
         while true{
             // 31日: 1, 3, 5, 7, 8, 10, 12月
             if (futureDate.month == 1 && futureDate.day! > 31) ||  (futureDate.month == 3 && futureDate.day! > 31) || (futureDate.month == 5 && futureDate.day! > 31) || (futureDate.month == 7 && futureDate.day! > 31) || (futureDate.month == 8 && futureDate.day! > 31) || (futureDate.month == 10 && futureDate.day! > 31) || (futureDate.month == 12 && futureDate.day! > 31) {
-                futureDate.day = 1 // 日数をリセット
+                futureDate.day = futureDate.day! - 31 // 日数をリセット
                 futureDate.month = futureDate.month! + 1 // 月に繰り上げ
                 // 月の繰り上げ処理
                 if (futureDate.month! > 12) {
                     futureDate.month = 1 // 月をリセット
                     futureDate.year = futureDate.year! + 1 // 年に繰り上げ
                 }
-                // 日数が31日以下になったら無限ループを抜ける
-                if (futureDate.month == 1 && futureDate.day! <= 31) ||  (futureDate.month == 3 && futureDate.day! <= 31) || (futureDate.month == 5 && futureDate.day! <= 31) || (futureDate.month == 7 && futureDate.day! <= 31) || (futureDate.month == 8 && futureDate.day! <= 31) || (futureDate.month == 10 && futureDate.day! <= 31) || (futureDate.month == 12 && futureDate.day! <= 31) {
-                    break
-                }
+            }
+            // 日数が31日以下になったら無限ループを抜ける
+            if (futureDate.month == 1 && futureDate.day! <= 31) ||  (futureDate.month == 3 && futureDate.day! <= 31) || (futureDate.month == 5 && futureDate.day! <= 31) || (futureDate.month == 7 && futureDate.day! <= 31) || (futureDate.month == 8 && futureDate.day! <= 31) || (futureDate.month == 10 && futureDate.day! <= 31) || (futureDate.month == 12 && futureDate.day! <= 31) {
+                print("31日")
+                break
             }
             // 30日: 4, 6, 9, 11
             if (futureDate.month == 4 && futureDate.day! > 30) || (futureDate.month == 6 && futureDate.day! > 30) || (futureDate.month == 9 && futureDate.day! > 30) || (futureDate.month == 11 && futureDate.day! > 30) {
-                futureDate.day = 1 // 日数をリセット
+                futureDate.day = futureDate.day! - 30 // 日数をリセット
                 futureDate.month = futureDate.month! + 1 // 月に繰り上げ
                 // 月の繰り上げ処理
                 if (futureDate.month! > 12) {
                     futureDate.month = 1 // 月をリセット
                     futureDate.year = futureDate.year! + 1 // 年に繰り上げ
                 }
-                // 日数が30日以下になったら無限ループを抜ける
-                if (futureDate.month == 4 && futureDate.day! <= 30) || (futureDate.month == 6 && futureDate.day! <= 30) || (futureDate.month == 9 && futureDate.day! <= 30) || (futureDate.month == 11 && futureDate.day! <= 30)  {
-                    break
-                }
+            }
+            // 日数が30日以下になったら無限ループを抜ける
+            if (futureDate.month == 4 && futureDate.day! <= 30) || (futureDate.month == 6 && futureDate.day! <= 30) || (futureDate.month == 9 && futureDate.day! <= 30) || (futureDate.month == 11 && futureDate.day! <= 30)  {
+                print("30日")
+                break
             }
             // 29日(うるう年): 2月
-            if (futureDate.year! % 4 == 0) || (futureDate.month == 2) || (futureDate.day! > 29) {
-                futureDate.day = 1 // 日数をリセット
+            if (futureDate.year! % 4 == 0) && (futureDate.month == 2) && (futureDate.day! > 29) {
+                futureDate.day = futureDate.day! - 29 // 日数をリセット
                 futureDate.month = futureDate.month! + 1 // 月に繰り上げ
                 // 月の繰り上げ処理
                 if (futureDate.month! > 12) {
                     futureDate.month = 1 // 月をリセット
                     futureDate.year = futureDate.year! + 1 // 年に繰り上げ
-                }
-                // 日数が29日以下になったら無限ループを抜ける
-                if (futureDate.year! % 4 == 0) || (futureDate.month == 2) || (futureDate.day! <= 29) {
-                    break
                 }
             }
+            // 日数が29日以下になったら無限ループを抜ける
+            if (futureDate.year! % 4 == 0) && (futureDate.month == 2) && (futureDate.day! <= 29) {
+                print("29日")
+                break
+            }
             // 28日（非うるう年): 2月
-            if  (futureDate.year! % 4 == 1) || (futureDate.month == 2) || (futureDate.day! > 28) {
-                futureDate.day = 1 // 日数をリセット
+            if  (futureDate.year! % 4 == 1) && (futureDate.month == 2) && (futureDate.day! > 28) {
+                futureDate.day = futureDate.day! - 28 // 日数をリセット
                 futureDate.month = futureDate.month! + 1 // 月に繰り上げ
                 // 月の繰り上げ処理
                 if (futureDate.month! > 12) {
                     futureDate.month = 1 // 月をリセット
                     futureDate.year = futureDate.year! + 1 // 年に繰り上げ
                 }
-                // 日数が28日以下になったら無限ループを抜ける
-                if (futureDate.year! % 4 == 1) || (futureDate.month == 2) || (futureDate.day! <= 28) {
-                    break
-                }
+            }
+            // 日数が28日以下になったら無限ループを抜ける
+            if (futureDate.year! % 4 == 1) && (futureDate.month == 2) && (futureDate.day! <= 28) {
+                print("28日")
+                break
             }
         }
         futureDate.minute = baseDate.minute! + 30
@@ -105,6 +109,6 @@ class ViewController: UIViewController {
         var pastDate = baseDate
         pastDate.hour = baseDate.hour! - 5
         pastDate.minute = baseDate.minute! - 30
-        print("基準日時の5時間30分後を算出（加算）：" + String(pastDate.year!) + "年" + String(pastDate.month!) + "月" + String(pastDate.day!) + "日" + String(pastDate.hour!) + "時" + String(pastDate.minute!) + "分" + String(pastDate.second!) + "秒")
+        print("基準日時の5時間30分前を算出（減算）：" + String(pastDate.year!) + "年" + String(pastDate.month!) + "月" + String(pastDate.day!) + "日" + String(pastDate.hour!) + "時" + String(pastDate.minute!) + "分" + String(pastDate.second!) + "秒")
     }
 }
