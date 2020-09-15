@@ -95,7 +95,6 @@ class ViewController: UIViewController {
                     break
                 }
             }
-            
         }
         futureDate.minute = baseDate.minute! + 30
         print("基準日時の153日後を算出（加算）：" + String(futureDate.year!) + "年" + String(futureDate.month!) + "月" + String(futureDate.day!) + "日" + String(futureDate.hour!) + "時" + String(futureDate.minute!) + "分" + String(futureDate.second!) + "秒")
