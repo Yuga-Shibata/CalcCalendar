@@ -41,7 +41,7 @@ class ViewController: UIViewController {
             roopDay = 365
         }
         for i in 1...roopDay {
-            // 基準日時の5時間30分後を算出（加算）
+            // 基準日時から算出（加算）
             var futureDate = baseDate
             futureDate.day = futureDate.day! + i
             // 繰り上げ処理
@@ -116,9 +116,11 @@ class ViewController: UIViewController {
             roopDay = 365
         }
         for i in 1...roopDay {
-            // 基準日時の150日前を算出（減算）
+            // 基準日時から（減算）
             var pastDate = baseDate
-            pastDate.day = baseDate.day! - roopDay
+            pastDate.day = baseDate.day! - i
+            print(roopDay)
+            print(i)
             // 繰り下げ処理
             while true {
                 // 31日: 1, 3, 5, 7, 8, 10, 12月
@@ -132,7 +134,7 @@ class ViewController: UIViewController {
                     }
                 }
                 // 日数が1日以上になったら無限ループを抜ける
-                if (pastDate.month == 1 && pastDate.day! > 0) || (pastDate.month == 3 && pastDate.day! > 0) || (pastDate.month == 5 && pastDate.day! > 0) || (pastDate.month == 7 && pastDate.day! > 0) || (pastDate.month == 8 && pastDate.day! > 0) || (pastDate.month == 10 && pastDate.day! > 0) || (pastDate.month == 12 && pastDate.day! > 0){
+                if (pastDate.month == 1 && 31 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 3 && 31 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 5 && 31 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 7 && 31 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 8 && 31 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 10 && 31 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 12 && 31 >= pastDate.day! && pastDate.day! > 0){
                     print("31日")
                     break
                 }
@@ -147,7 +149,7 @@ class ViewController: UIViewController {
                     }
                 }
                 // 日数が1日以上になったら無限ループを抜ける
-                if (pastDate.month == 4 && pastDate.day! > 0) || (pastDate.month == 6 && pastDate.day! > 0) || (pastDate.month == 9 && pastDate.day! > 0) || (pastDate.month == 11 && pastDate.day! > 0) {
+                if (pastDate.month == 4 && 30 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 6 && 30 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 9 && 30 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 11 && 30 >= pastDate.day! && pastDate.day! > 0) {
                     print("30日")
                     break
                 }
@@ -162,7 +164,7 @@ class ViewController: UIViewController {
                     }
                 }
                 // 日数が1日以上になったら無限ループを抜ける
-                if (pastDate.year! % 2 == 0) && (pastDate.month == 2) && (pastDate.day! > 0) {
+                if (pastDate.year! % 2 == 0) && (pastDate.month == 2) && (29 >= pastDate.day! && pastDate.day! > 0) {
                     print("29日")
                     break
                 }
@@ -177,7 +179,7 @@ class ViewController: UIViewController {
                     }
                 }
                 // 日数が1日以上になったら無限ループを抜ける
-                if (pastDate.year! % 2 == 1) && (pastDate.month == 2) && (pastDate.day! > 0) {
+                if (pastDate.year! % 2 == 1) && (pastDate.month == 2) && (28 >= pastDate.day! && pastDate.day! > 0) {
                     print("28日")
                     break
                 }
