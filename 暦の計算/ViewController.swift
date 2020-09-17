@@ -40,6 +40,7 @@ class ViewController: UIViewController {
         } else if baseDate.year! % 2 == 1 {
             roopDay = 365
         }
+        
         for i in 1...roopDay {
             // 基準日時から算出（加算）
             var futureDate = baseDate
@@ -109,6 +110,56 @@ class ViewController: UIViewController {
     // 基準日時から、1年前までの日時を取得して、リストに格納する
     func getPastDate() {
         var roopDay = Int()
+        var pastDate = baseDate
+        // 関数定義
+        // 31日
+        func days31() {
+            if (pastDate.month == 1 && 0 > pastDate.day! && pastDate.day! < 31) || (pastDate.month == 3 && 0 > pastDate.day! && pastDate.day! < 31) || (pastDate.month == 5 && 0 > pastDate.day! && pastDate.day! < 31) || (pastDate.month == 7 && 0 > pastDate.day! && pastDate.day! < 31) || (pastDate.month == 8 && 0 > pastDate.day! && pastDate.day! < 31) || (pastDate.month == 10 && 0 > pastDate.day! && pastDate.day! < 31) || (pastDate.month == 12 && 0 > pastDate.day! && pastDate.day! < 31) {
+                pastDate.day = pastDate.day! + 31 // 日数を加算
+                pastDate.month = pastDate.month! - 1 // 一ヶ月さかのぼる
+                // 月の繰り下げ処理
+                if (pastDate.month! < 1) {
+                    pastDate.month = 12 // 月をリセット
+                    pastDate.year = pastDate.year! - 1 // 年に繰り下げ
+                }
+            }
+        }
+        // 30日
+        func days30() {
+            if (pastDate.month == 4 && 0 > pastDate.day! && pastDate.day! < 30) || (pastDate.month == 6 && 0 > pastDate.day! && pastDate.day! < 30) || (pastDate.month == 9 && 0 > pastDate.day! && pastDate.day! < 30) || (pastDate.month == 11 && 0 > pastDate.day! && pastDate.day! < 30) {
+                pastDate.day = pastDate.day! + 30 // 日数を加算
+                pastDate.month = pastDate.month! - 1 // 一ヶ月さかのぼる
+                // 月の繰り下げ処理
+                if (pastDate.month! < 1) {
+                    pastDate.month = 12 // 月をリセット
+                    pastDate.year = pastDate.year! - 1 // 年に繰り下げ
+                }
+            }
+        }
+        // 29, 28
+        func days29and28() {
+            // 29日(うるう年): 2月
+            if (pastDate.year! % 2 == 0) && (pastDate.month == 2) && (0 > pastDate.day! && pastDate.day! < 29){
+                pastDate.day = pastDate.day! + 29 // 日数を加算
+                pastDate.month = pastDate.month! - 1 // 一ヶ月さかのぼる
+                // 月の繰り下げ処理
+                if (pastDate.month! < 1) {
+                    pastDate.month = 12 // 月をリセット
+                    pastDate.year = pastDate.year! - 1 // 年に繰り下げ
+                }
+            }
+            // 28日（非うるう年): 2月
+            if (pastDate.year! % 2 == 1) && (pastDate.month == 2) && (0 > pastDate.day! && pastDate.day! < 28) {
+                pastDate.day = pastDate.day! + 28 // 日数を加算
+                pastDate.month = pastDate.month! - 1 // 一ヶ月さかのぼる
+                // 月の繰り下げ処理
+                if (pastDate.month! < 1) {
+                    pastDate.month = 12 // 月をリセット
+                    pastDate.year = pastDate.year! - 1 // 年に繰り下げ
+                }
+            }
+
+        }
         // うるう年の場合
         if baseDate.year! % 2 == 0 {
             roopDay = 366
@@ -117,7 +168,6 @@ class ViewController: UIViewController {
         }
         for i in 1...roopDay {
             // 基準日時から（減算）
-            var pastDate = baseDate
             pastDate.day = baseDate.day! - i
             print(roopDay)
             print(i)
