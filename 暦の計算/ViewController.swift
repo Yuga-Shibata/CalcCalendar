@@ -173,60 +173,44 @@ class ViewController: UIViewController {
             print(i)
             // 繰り下げ処理
             while true {
-                // 31日: 1, 3, 5, 7, 8, 10, 12月
-                if (pastDate.month == 1 && 0 > pastDate.day! && pastDate.day! < 31) || (pastDate.month == 3 && 0 > pastDate.day! && pastDate.day! < 31) || (pastDate.month == 5 && 0 > pastDate.day! && pastDate.day! < 31) || (pastDate.month == 7 && 0 > pastDate.day! && pastDate.day! < 31) || (pastDate.month == 8 && 0 > pastDate.day! && pastDate.day! < 31) || (pastDate.month == 10 && 0 > pastDate.day! && pastDate.day! < 31) || (pastDate.month == 12 && 0 > pastDate.day! && pastDate.day! < 31) {
-                    pastDate.day = pastDate.day! + 31 // 日数を加算
-                    pastDate.month = pastDate.month! - 1 // 一ヶ月さかのぼる
-                    // 月の繰り下げ処理
-                    if (pastDate.month! < 1) {
-                        pastDate.month = 12 // 月をリセット
-                        pastDate.year = pastDate.year! - 1 // 年に繰り下げ
-                    }
-                }
+                days31() // 1月
+                days29and28() // 2月
+                days31() // 3月
+                days30() // 4月
+                days31() // 5月
+                days30() // 6月
+                days31() // 7月
+                days31() // 8月
+                days30() // 9月
+                days31() // 10月
+                days30() // 11月
+                days31() // 12月
+                days31() // 1月
+                days29and28() // 2月
+                days31() // 3月
+                days30() // 4月
+                days31() // 5月
+                days30() // 6月
+                days31() // 7月
+                days31() // 8月
+                days30() // 9月
+                days31() // 10月
+                days30() // 11月
+                days31() // 12月
                 // 日数が1日以上になったら無限ループを抜ける
                 if (pastDate.month == 1 && 31 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 3 && 31 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 5 && 31 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 7 && 31 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 8 && 31 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 10 && 31 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 12 && 31 >= pastDate.day! && pastDate.day! > 0){
                     print("31日")
                     break
-                }
-                // 30日: 4, 6, 9, 11
-                if (pastDate.month == 4 && 0 > pastDate.day! && pastDate.day! < 30) || (pastDate.month == 6 && 0 > pastDate.day! && pastDate.day! < 30) || (pastDate.month == 9 && 0 > pastDate.day! && pastDate.day! < 30) || (pastDate.month == 11 && 0 > pastDate.day! && pastDate.day! < 30) {
-                    pastDate.day = pastDate.day! + 30 // 日数を加算
-                    pastDate.month = pastDate.month! - 1 // 一ヶ月さかのぼる
-                    // 月の繰り下げ処理
-                    if (pastDate.month! < 1) {
-                        pastDate.month = 12 // 月をリセット
-                        pastDate.year = pastDate.year! - 1 // 年に繰り下げ
-                    }
                 }
                 // 日数が1日以上になったら無限ループを抜ける
                 if (pastDate.month == 4 && 30 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 6 && 30 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 9 && 30 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 11 && 30 >= pastDate.day! && pastDate.day! > 0) {
                     print("30日")
                     break
                 }
-                // 29日(うるう年): 2月
-                if (pastDate.year! % 2 == 0) && (pastDate.month == 2) && (0 > pastDate.day! && pastDate.day! < 29){
-                    pastDate.day = pastDate.day! + 29 // 日数を加算
-                    pastDate.month = pastDate.month! - 1 // 一ヶ月さかのぼる
-                    // 月の繰り下げ処理
-                    if (pastDate.month! < 1) {
-                        pastDate.month = 12 // 月をリセット
-                        pastDate.year = pastDate.year! - 1 // 年に繰り下げ
-                    }
-                }
                 // 日数が1日以上になったら無限ループを抜ける
                 if (pastDate.year! % 2 == 0) && (pastDate.month == 2) && (29 >= pastDate.day! && pastDate.day! > 0) {
                     print("29日")
                     break
-                }
-                // 28日（非うるう年): 2月
-                if (pastDate.year! % 2 == 1) && (pastDate.month == 2) && (0 > pastDate.day! && pastDate.day! < 28) {
-                    pastDate.day = pastDate.day! + 28 // 日数を加算
-                    pastDate.month = pastDate.month! - 1 // 一ヶ月さかのぼる
-                    // 月の繰り下げ処理
-                    if (pastDate.month! < 1) {
-                        pastDate.month = 12 // 月をリセット
-                        pastDate.year = pastDate.year! - 1 // 年に繰り下げ
-                    }
                 }
                 // 日数が1日以上になったら無限ループを抜ける
                 if (pastDate.year! % 2 == 1) && (pastDate.month == 2) && (28 >= pastDate.day! && pastDate.day! > 0) {
