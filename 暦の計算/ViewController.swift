@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         DateInit() // Date設定の初期化
-        getFutureDate()
+//        getFutureDate()
         getPastDate()
     }
     
@@ -114,7 +114,7 @@ class ViewController: UIViewController {
         // 関数定義
         // 31日
         func days31() {
-            if (pastDate.month == 1 && 0 > pastDate.day! && pastDate.day! < 31) || (pastDate.month == 3 && 0 > pastDate.day! && pastDate.day! < 31) || (pastDate.month == 5 && 0 > pastDate.day! && pastDate.day! < 31) || (pastDate.month == 7 && 0 > pastDate.day! && pastDate.day! < 31) || (pastDate.month == 8 && 0 > pastDate.day! && pastDate.day! < 31) || (pastDate.month == 10 && 0 > pastDate.day! && pastDate.day! < 31) || (pastDate.month == 12 && 0 > pastDate.day! && pastDate.day! < 31) {
+            if (pastDate.month == 1 && 0 >= pastDate.day! && pastDate.day! <= 31) || (pastDate.month == 3 && 0 >= pastDate.day! && pastDate.day! < 31) || (pastDate.month == 5 && 0 >= pastDate.day! && pastDate.day! <= 31) || (pastDate.month == 7 && 0 >= pastDate.day! && pastDate.day! <= 31) || (pastDate.month == 8 && 0 >= pastDate.day! && pastDate.day! <= 31) || (pastDate.month == 10 && 0 >= pastDate.day! && pastDate.day! <= 31) || (pastDate.month == 12 && 0 >= pastDate.day! && pastDate.day! <= 31) {
                 pastDate.day = pastDate.day! + 31 // 日数を加算
                 pastDate.month = pastDate.month! - 1 // 一ヶ月さかのぼる
                 // 月の繰り下げ処理
@@ -126,7 +126,7 @@ class ViewController: UIViewController {
         }
         // 30日
         func days30() {
-            if (pastDate.month == 4 && 0 > pastDate.day! && pastDate.day! < 30) || (pastDate.month == 6 && 0 > pastDate.day! && pastDate.day! < 30) || (pastDate.month == 9 && 0 > pastDate.day! && pastDate.day! < 30) || (pastDate.month == 11 && 0 > pastDate.day! && pastDate.day! < 30) {
+            if (pastDate.month == 4 && 0 >= pastDate.day! && pastDate.day! < 30) || (pastDate.month == 6 && 0 >= pastDate.day! && pastDate.day! < 30) || (pastDate.month == 9 && 0 >= pastDate.day! && pastDate.day! < 30) || (pastDate.month == 11 && 0 >= pastDate.day! && pastDate.day! < 30) {
                 pastDate.day = pastDate.day! + 30 // 日数を加算
                 pastDate.month = pastDate.month! - 1 // 一ヶ月さかのぼる
                 // 月の繰り下げ処理
@@ -139,7 +139,7 @@ class ViewController: UIViewController {
         // 29, 28
         func days29and28() {
             // 29日(うるう年): 2月
-            if (pastDate.year! % 2 == 0) && (pastDate.month == 2) && (0 > pastDate.day! && pastDate.day! < 29){
+            if (pastDate.year! % 2 == 0) && (pastDate.month == 2) && (0 >= pastDate.day! && pastDate.day! < 29){
                 pastDate.day = pastDate.day! + 29 // 日数を加算
                 pastDate.month = pastDate.month! - 1 // 一ヶ月さかのぼる
                 // 月の繰り下げ処理
@@ -149,7 +149,7 @@ class ViewController: UIViewController {
                 }
             }
             // 28日（非うるう年): 2月
-            if (pastDate.year! % 2 == 1) && (pastDate.month == 2) && (0 > pastDate.day! && pastDate.day! < 28) {
+            if (pastDate.year! % 2 == 1) && (pastDate.month == 2) && (0 >= pastDate.day! && pastDate.day! < 28) {
                 pastDate.day = pastDate.day! + 28 // 日数を加算
                 pastDate.month = pastDate.month! - 1 // 一ヶ月さかのぼる
                 // 月の繰り下げ処理
@@ -158,7 +158,6 @@ class ViewController: UIViewController {
                     pastDate.year = pastDate.year! - 1 // 年に繰り下げ
                 }
             }
-
         }
         // うるう年の場合
         if baseDate.year! % 2 == 0 {
@@ -197,6 +196,7 @@ class ViewController: UIViewController {
                 days31() // 10月
                 days30() // 11月
                 days31() // 12月
+                // ブレークポイント
                 // 日数が1日以上になったら無限ループを抜ける
                 if (pastDate.month == 1 && 31 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 3 && 31 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 5 && 31 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 7 && 31 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 8 && 31 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 10 && 31 >= pastDate.day! && pastDate.day! > 0) || (pastDate.month == 12 && 31 >= pastDate.day! && pastDate.day! > 0){
                     print("31日")
