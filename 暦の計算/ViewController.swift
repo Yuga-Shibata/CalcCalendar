@@ -11,14 +11,14 @@ import UIKit
 class ViewController: UIViewController {
     
     var calendar = Calendar(identifier: .gregorian) // グレゴリオ暦
-    var futureDateArray:Array = [String]() // 未来の日付
-    var pastDateArray:Array = [String]() // 過去の日付
+    var futureDateArray:Array = [DateComponents]() // 未来の日付
+    var pastDateArray:Array = [DateComponents]() // 過去の日付
     var baseDate = DateComponents()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         DateInit() // Date設定の初期化
-//        getFutureDate()
+        getFutureDate()
         getPastDate()
     }
     
@@ -104,6 +104,7 @@ class ViewController: UIViewController {
                     break
                 }
             }
+            futureDateArray.append(futureDate)
             print("基準日時の\(i)日後を算出（加算）：" + String(futureDate.year!) + "年" + String(futureDate.month!) + "月" + String(futureDate.day!) + "日")
         }
     }
@@ -156,6 +157,7 @@ class ViewController: UIViewController {
                     returnday = 0
                 }
                 if returnday == 0 {
+                    pastDateArray.append(pastDate)
                     print("基準日時の\(i)日前を算出（減算）：" + String(pastDate.year!) + "年" + String(pastDate.month!) + "月" + String(pastDate.day!) + "日")
                     break
                 }
