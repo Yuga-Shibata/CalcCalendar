@@ -110,11 +110,12 @@ class ViewController: UIViewController {
     // 基準日時から、1年前までの日時を取得して、リストに格納する
     func getPastDate() {
         var roopDay = Int()
-        var pastDate = baseDate
+        var pastDate = DateComponents()
         var returnday = Int()
         
         for i in 1...365 {
-            returnday = pastDate.day! - returnday
+            pastDate = baseDate
+            returnday = pastDate.day! - i
             while true {
                 if returnday <= 0 {
                     // 月を繰り下げる
