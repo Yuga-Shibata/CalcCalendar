@@ -113,37 +113,39 @@ class ViewController: UIViewController {
         var pastDate = baseDate
         var returnday = Int()
         
-        returnday = pastDate.day! - returnday
-        while true {
-            if returnday <= 0 {
-                // 月を繰り下げる
-                pastDate.month = pastDate.month! - 1
-                if pastDate.month == 0 {
-                    // 年を繰り下げる
-                    pastDate.year = pastDate.year! - 1
-                    // 月を最終月にセット
-                    pastDate.month = 12
-                }
-                // 日をその月の最終日に更新
-                pastDate.day = getDayOfMonth(year: pastDate.year!, month: pastDate.month!)
-                if returnday < 0 {
-                    // returndayを更新
-                    returnday = pastDate.day! + returnday
-                    print(returnday)
-                    if returnday > 0 && returnday <= pastDate.day! {
-                        pastDate.day = returnday
-                        returnday = 0
+        for i in 1...365 {
+            returnday = pastDate.day! - returnday
+            while true {
+                if returnday <= 0 {
+                    // 月を繰り下げる
+                    pastDate.month = pastDate.month! - 1
+                    if pastDate.month == 0 {
+                        // 年を繰り下げる
+                        pastDate.year = pastDate.year! - 1
+                        // 月を最終月にセット
+                        pastDate.month = 12
+                    }
+                    // 日をその月の最終日に更新
+                    pastDate.day = getDayOfMonth(year: pastDate.year!, month: pastDate.month!)
+                    if returnday < 0 {
+                        // returndayを更新
+                        returnday = pastDate.day! + returnday
+                        print(returnday)
+                        if returnday > 0 && returnday <= pastDate.day! {
+                            pastDate.day = returnday
+                            returnday = 0
+                        }
                     }
                 }
-            }
-            if returnday > 0 {
-                pastDate.day = returnday
-                returnday = 0
-            }
-            if returnday == 0 {
-                print("ブレークポイント")
-                print(pastDate.year!, pastDate.month!, pastDate.day!)
-                break
+                if returnday > 0 {
+                    pastDate.day = returnday
+                    returnday = 0
+                }
+                if returnday == 0 {
+                    print("ブレークポイント")
+                    print(pastDate.year!, pastDate.month!, pastDate.day!)
+                    break
+                }
             }
         }
     }
