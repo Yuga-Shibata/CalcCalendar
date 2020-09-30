@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         calendar.locale = Locale(identifier: "ja") // ロケール（地域）を設定
         // 基準となる現在の日時を取得する
         baseDate = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date())
-        print("現在時刻                   ：" + String(baseDate.year!) + "年" + String(baseDate.month!) + "月" + String(baseDate.day!) + "日" + String(baseDate.hour!) + "時" + String(baseDate.minute!) + "分" + String(baseDate.second!) + "秒")
+        print("現在時刻                 ：" + String(baseDate.year!) + "年" + String(baseDate.month!) + "月" + String(baseDate.day!) + "日")
     }
     
     // 基準日時から、1年後までの日時を取得して、リストに格納する
@@ -104,7 +104,7 @@ class ViewController: UIViewController {
                     break
                 }
             }
-            print("基準日時の\(i)日後を算出（加算）：" + String(futureDate.year!) + "年" + String(futureDate.month!) + "月" + String(futureDate.day!) + "日" + String(futureDate.hour!) + "時" + String(futureDate.minute!) + "分" + String(futureDate.second!) + "秒")
+            print("基準日時の\(i)日後を算出（加算）：" + String(futureDate.year!) + "年" + String(futureDate.month!) + "月" + String(futureDate.day!) + "日")
         }
     }
     // 基準日時から、1年前までの日時を取得して、リストに格納する
@@ -112,8 +112,12 @@ class ViewController: UIViewController {
         var roopDay = Int()
         var pastDate = DateComponents()
         var returnday = Int()
-        
-        for i in 1...365 {
+        if baseDate.year! % 2 == 1 {
+            roopDay = 365
+        } else if baseDate.year! % 2 == 0 {
+            roopDay = 366
+        }
+        for i in 1...roopDay {
             pastDate = baseDate
             returnday = pastDate.day! - i
             while true {
@@ -131,10 +135,19 @@ class ViewController: UIViewController {
                     if returnday < 0 {
                         // returndayを更新
                         returnday = pastDate.day! + returnday
-                        print(returnday)
                         if returnday > 0 && returnday <= pastDate.day! {
                             pastDate.day = returnday
                             returnday = 0
+                        } else if returnday == 0 {
+                            pastDate.month! -= 1
+                            if pastDate.month == 0 {
+                                // 年を繰り下げる
+                                pastDate.year = pastDate.year! - 1
+                                // 月を最終月にセット
+                                pastDate.month = 12
+                            }
+                            // 日をその月の最終日に更新
+                            pastDate.day = getDayOfMonth(year: pastDate.year!, month: pastDate.month!)
                         }
                     }
                 }
@@ -143,8 +156,7 @@ class ViewController: UIViewController {
                     returnday = 0
                 }
                 if returnday == 0 {
-                    print("ブレークポイント")
-                    print(pastDate.year!, pastDate.month!, pastDate.day!)
+                    print("基準日時の\(i)日前を算出（減算）：" + String(pastDate.year!) + "年" + String(pastDate.month!) + "月" + String(pastDate.day!) + "日")
                     break
                 }
             }
