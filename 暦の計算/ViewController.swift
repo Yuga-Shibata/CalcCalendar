@@ -111,7 +111,7 @@ class ViewController: UIViewController {
     func getPastDate() {
         var roopDay = Int()
         var pastDate = baseDate
-        var returnday = 100
+        var returnday = Int()
         
         returnday = pastDate.day! - returnday
         while true {
@@ -135,6 +135,10 @@ class ViewController: UIViewController {
                         returnday = 0
                     }
                 }
+            }
+            if returnday > 0 {
+                pastDate.day = returnday
+                returnday = 0
             }
             if returnday == 0 {
                 print("ブレークポイント")
