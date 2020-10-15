@@ -11,9 +11,9 @@ import UIKit
 class ViewController: UIViewController {
     
     var calendar = Calendar(identifier: .gregorian) // グレゴリオ暦
-    var futureDateArray:Array = [DateComponents]() // 未来の日付
-    var pastDateArray:Array = [DateComponents]() // 過去の日付
     var baseDate = DateComponents()
+    var futureDateArray:Array = [[DateComponents()], [String()]] // 未来の日付/その日付の曜日
+    var pastDateArray:Array   = [[DateComponents()], [String()]] // 過去の日付/その日付の曜日
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,8 +104,10 @@ class ViewController: UIViewController {
                     break
                 }
             }
-            futureDateArray.append(futureDate)
-            print("基準日時の\(i)日後を算出（加算）：" + String(futureDate.year!) + "年" + String(futureDate.month!) + "月" + String(futureDate.day!) + "日")
+            let week = getWeekday(year: futureDate.year!, month: futureDate.month!, day: futureDate.day!)
+            futureDateArray[0].append(futureDate) // 日付を格納
+            futureDateArray[1].append(week) // 曜日を格納
+            print("基準日時の\(i)日後を算出（加算）：" + String(futureDate.year!) + "年" + String(futureDate.month!) + "月" + String(futureDate.day!) + "日" + getWeekday(year: futureDate.year!, month: futureDate.month!, day: futureDate.day!) + "曜日")
         }
     }
     // 基準日時から、1年前までの日時を取得して、リストに格納する
@@ -157,8 +159,10 @@ class ViewController: UIViewController {
                     returnday = 0
                 }
                 if returnday == 0 {
-                    pastDateArray.append(pastDate)
-                    print("基準日時の\(i)日前を算出（減算）：" + String(pastDate.year!) + "年" + String(pastDate.month!) + "月" + String(pastDate.day!) + "日")
+                    let week = getWeekday(year: pastDate.year!, month: pastDate.month!, day: pastDate.day!)
+                    pastDateArray[0].append(pastDate) // 日付を格納
+                    pastDateArray[1].append(week) // 曜日を格納
+                    print("基準日時の\(i)日前を算出（減算）：" + String(pastDate.year!) + "年" + String(pastDate.month!) + "月" + String(pastDate.day!) + "日" + getWeekday(year: pastDate.year!, month: pastDate.month!, day: pastDate.day!) + "曜日")
                     break
                 }
             }
@@ -206,5 +210,10 @@ class ViewController: UIViewController {
             print("値を検出できませんでした。")
             return 101
         }
+    }
+    // 現在の日付から曜日を取得する
+    func getWeekday(year: Int, month: Int, day: Int) -> String {
+        let weekDaay = ["日", "月", "火", "水", "木", "金", "土"]
+        return weekDaay[(year + year / 4 - year / 100 + year / 400 + (13 * month + 8) / 5 + day) % 7]
     }
 }
