@@ -211,7 +211,7 @@ class ViewController: UIViewController {
             return 101
         }
     }
-    // 現在の日付から曜日を取得する
+    // 現在の日付から曜日を取得する（ツェラーの公式）
     func getWeekday(year: Int, month: Int, day: Int) -> String {
         let weekDaay = ["日", "月", "火", "水", "木", "金", "土"]
         return weekDaay[(year + year / 4 - year / 100 + year / 400 + (13 * month + 8) / 5 + day) % 7]
