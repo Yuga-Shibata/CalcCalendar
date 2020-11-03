@@ -13,6 +13,7 @@
 		825C3F6D24FF18DC00C6BE24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 825C3F6B24FF18DC00C6BE24 /* Main.storyboard */; };
 		825C3F6F24FF18DD00C6BE24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 825C3F6E24FF18DD00C6BE24 /* Assets.xcassets */; };
 		825C3F7224FF18DD00C6BE24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 825C3F7024FF18DD00C6BE24 /* LaunchScreen.storyboard */; };
+		82FD45C5254ED9B10035C923 /* CalendarCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FD45C4254ED9B10035C923 /* CalendarCalc.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		825C3F6E24FF18DD00C6BE24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		825C3F7124FF18DD00C6BE24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		825C3F7324FF18DD00C6BE24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		82FD45C4254ED9B10035C923 /* CalendarCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCalc.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +42,7 @@
 		825C3F5924FF18DC00C6BE24 = {
 			isa = PBXGroup;
 			children = (
+				82FD45C3254ED97D0035C923 /* classes */,
 				825C3F6424FF18DC00C6BE24 /* 暦の計算 */,
 				825C3F6324FF18DC00C6BE24 /* Products */,
 			);
@@ -65,6 +68,14 @@
 				825C3F7324FF18DD00C6BE24 /* Info.plist */,
 			);
 			path = "暦の計算";
+			sourceTree = "<group>";
+		};
+		82FD45C3254ED97D0035C923 /* classes */ = {
+			isa = PBXGroup;
+			children = (
+				82FD45C4254ED9B10035C923 /* CalendarCalc.swift */,
+			);
+			path = classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +151,7 @@
 			files = (
 				825C3F6A24FF18DC00C6BE24 /* ViewController.swift in Sources */,
 				825C3F6624FF18DC00C6BE24 /* AppDelegate.swift in Sources */,
+				82FD45C5254ED9B10035C923 /* CalendarCalc.swift in Sources */,
 				825C3F6824FF18DC00C6BE24 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
