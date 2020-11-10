@@ -14,10 +14,16 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let array = calccalendar.get2year()
-        // 値の取り出し
-        for i in 0...array[0].count - 1 {
-            print(array[0][i], array[1][i])
-        }
+        let calendar = CalendarCalc()
+        let now     =  calendar.getNowDate()
+        print(now)
+        print(type(of: now.date))
+        let days    = calendar.getMonthOfDays(year: now.year!, month: now.month!)
+        print(days)
+        let weekDay = ["日", "月", "火", "水", "木", "金", "土"]
+        let week = weekDay[calendar.getWeekday(year: now.year!, month: now.month!)]
+        print(week)
+        let later = calendar.getMonthLater(DateComponent: now, Later: 13)
+        print(later)
     }
 }
